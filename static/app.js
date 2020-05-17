@@ -1,8 +1,8 @@
 // fills in dashboard with information and plots
 function optionChanged(metadata, samples) {
-    d3.json("../data/samples.json").then(function(importedData) {
+    d3.json("data/samples.json").then(function(importedData) {
         var data = importedData
-        
+
         // value of the dropdown menu selected
         var subject_id = d3.select("#selDataset").node().value
         
@@ -81,6 +81,28 @@ function optionChanged(metadata, samples) {
         }
         
         Plotly.newPlot('bubble', bubbleChartData, layoutBubble)
+        
+        // create gauge chart
+        var trace3 = {
+            domain: {x: [0, 1], y: [0, 1]},
+            title: {text: "Scrubs per Week"},
+            value: metadata.wfreq,
+            type: "indicator",
+            mode: "gauge+number"
+        }
+
+        var gaugeChartData = [trace3]
+
+        var layoutGauge = {
+            width: 500,
+            height: 400,
+            margin: {
+                t: 0,
+                b: 0
+            }
+        }
+
+        Plotly.newPlot("gauge", gaugeChartData, layoutGauge)
     })
 }
 
@@ -88,7 +110,7 @@ function optionChanged(metadata, samples) {
 function init() {    
     var dropDownMenu = d3.select("#selDataset")
 
-    d3.json("../data/samples.json").then(function(importedData) {
+    d3.json("data/samples.json").then(function(importedData) {
         var data = importedData
 
         // filling in the dropdown menu
