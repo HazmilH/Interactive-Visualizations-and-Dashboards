@@ -8,7 +8,7 @@ In this assignment, you will build an interactive dashboard to explore the [Bell
 
 The dataset reveals that a small handful of microbial species (also called operational taxonomic units, or OTUs, in the study) were present in more than 70% of people, while the rest were relatively rare.
 
-## Step 1: Plotly
+## Plotly
 
 1. Use the D3 library to read in `samples.json`.
 
@@ -42,13 +42,20 @@ The dataset reveals that a small handful of microbial species (also called opera
 
 ![demo](Images/demographic.png)
 
-6. Create a gauge chart that displays the number of times each subject washes their belly button per week.
-
-![Gauge_Chart](Images/gauge.png)
-
-7. Update all of the plots any time that a new sample is selected.
+6. Update all of the plots any time that a new sample is selected.
 
 Additionally, you are welcome to create any layout that you would like for your dashboard:
 
 ![main](Images/main-webpage.png)
 
+## Advanced Challenge: Gauge
+
+The following task is advanced and therefore optional.
+
+* Adapt the Gauge Chart from <https://plot.ly/javascript/gauge-charts/> to plot the weekly washing frequency of the individual.
+
+* You will need to modify the example gauge code to account for values ranging from 0 through 9.
+
+* Update the chart whenever a new sample is selected.
+
+![Gauge_Chart](Images/gauge.png)
