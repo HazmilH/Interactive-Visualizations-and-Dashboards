@@ -83,27 +83,103 @@ function optionChanged() {
         Plotly.newPlot('bubble', bubbleChartData, layoutBubble)
         
         // create gauge chart
-        var trace3 = {
-            domain: {x: [0, 1], y: [0, 1]},
-            title: {text: "Scrubs per Week"},
-            value: metadata.wfreq,
-            type: "indicator",
-            mode: "gauge+number"
-        }
+        // needle
+        var degrees = 9 - metadata.wfreq,
+            radius = .5
+        var radians = degrees * Math.PI / 9
+        var x = radius * Math.cos(radians)
+        var y = radius * Math.sin(radians)
 
-        var gaugeChartData = [trace3]
+        //  constructing the path where x is the xpath, and y is the ypath, and z is the end path
+        var mainPath = 'M -.0 -0.025 L .0 0.025 L '
+        var path = mainPath.concat(`${x}  ${y}  z`)
+
+        var gaugeChartData = [{
+            type: 'scatter',
+            x: [0],
+            y: [0],
+            marker: {size: 20, color: 'red'},
+            showlegend: false,
+            name: "Scrubs/Week",
+            text: metadata.wfreq
+        },
+        {
+            textinfo: 'text',
+            textposition: 'inside',
+            hole: .5,
+            type: 'pie',
+            showlegend: false,
+            marker: { colors: ['#FFF0F5','#FFD1DC','#FFC1CC','#FFC0CB','#FFB7C5','#FC8EAC','#E75480','#DE3163','#E30B5D','white']},
+            values: [ 81/9, 81/9, 81/9, 81/9, 81/9, 81/9, 81/9, 81/9, 81/9, 81],
+            rotation: 90,
+            text: ['0-1','1-2','2-3','3-4','4-5','5-6','6-7','7-8','8-9'],
+            direction: 'clockwise',
+            hoverinfo: 'text'
+        }]
 
         var layoutGauge = {
+            shapes: [{
+                type: 'path',
+                path: path,
+                fillcolor: 'red',
+                line: {
+                    color: 'red'
+                }
+            }],
+            title: 'Belly Button Washing Frequency <br> Scrubs per week',
+            font: {
+                weight: "bold",
+                size: 15,
+                color: "black"
+            },
+            height: 500,
             width: 500,
-            height: 400,
             margin: {
-                t: 0,
-                b: 0
-            }
-        }
+                l: 0,
+                r: 0,
+                b: 0,
+                t: 150
+            },
+            // Scaling the axes 
+            xaxis: { zeroline: false, showticklabels: false, showgrid: false, range: [-1, 1] },
+            yaxis: { zeroline: false, showticklabels: false, showgrid: false, range: [-1, 1] }
+        };
 
         Plotly.newPlot("gauge", gaugeChartData, layoutGauge)
     })
+            // showlegend: false,
+            // hole: 0.4,
+            // rotation: 90,
+            // values: [ 81/9, 81/9, 81/9, 81/9, 81/9, 81/9, 81/9, 81/9, 81/9, 81],
+            // text: ['0-1','1-2','2-3','3-4','4-5','5-6','6-7','7-8','8-9'],
+            // direction: 'clockwise',
+            // textinfo: 'text',
+            // textposition: 'inside',
+            // marker: {
+            //     colors: ['#FFF0F5','#FFD1DC','#FFC1CC','#FFC0CB','#FFB7C5','#FC8EAC','#E75480','#DE3163','#E30B5D','white'],
+            // }
+        // }
+
+        // var gaugeChartData = [trace3]
+
+        // var layoutGauge = {
+        //     shapes: [{
+        //         type: 'line',
+        //         x0: 0,
+        //         y0: 0,
+        //         x1: x,
+        //         y1: y,
+        //         line: {
+        //           color: 'black',
+        //           width: 3
+        //         }
+        //       }],
+        //       title: 'Chart',
+        //       xaxis: {visible: false, range: [-1, 1]},
+        //       yaxis: {visible: false, range: [-1, 1]}
+        // }
+
+        // Plotly.newPlot("gauge", gaugeChartData, layoutG)
 }
 
 // opening funtion
