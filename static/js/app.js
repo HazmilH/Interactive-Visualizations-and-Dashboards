@@ -1,6 +1,8 @@
 // fills in dashboard with information and plots
 function optionChanged(metadata, samples) {
-    d3.json("../data/samples.json").then(function(data) {
+    d3.json("../data/samples.json").then(function(importedData) {
+        var data = importedData
+        
         // value of the dropdown menu selected
         var subject_id = d3.select("#selDataset").node().value
         
@@ -86,7 +88,9 @@ function optionChanged(metadata, samples) {
 function init() {    
     var dropDownMenu = d3.select("#selDataset")
 
-    d3.json("../data/samples.json").then(function(data) {
+    d3.json("../data/samples.json").then(function(importedData) {
+        var data = importedData
+
         // filling in the dropdown menu
         var names = data.names
 
