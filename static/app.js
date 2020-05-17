@@ -1,5 +1,5 @@
 // fills in dashboard with information and plots
-function optionChanged(metadata, samples) {
+function optionChanged() {
     d3.json("data/samples.json").then(function(importedData) {
         var data = importedData
 
