@@ -40,7 +40,7 @@ The dataset reveals that a small handful of microbial species (also called opera
 
 5. Display each key-value pair from the metadata JSON object somewhere on the page.
 
-![hw](Images/hw03.png)
+![demo](Images/demographic.png)
 
 6. Create a gauge chart that displays the number of times each subject washes their belly button per week.
 
